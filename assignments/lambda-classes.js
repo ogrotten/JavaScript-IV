@@ -23,6 +23,10 @@ class Instructor extends LambdaPrime {
 	grade(student, subj) {
 		return `${student.name} receives a perfect score on ${subj}`;
 	}
+	grademod(student){
+		let newgrade = student.grade + (Math.random() * (50 - (-50) + (Math.abs(-50))))
+		return `Original grade: ${student.grade}%. After grading: ${Math.floor(newgrade)}%. NIIICE.`
+	}
 }
 
 class Student extends LambdaPrime {
@@ -31,6 +35,7 @@ class Student extends LambdaPrime {
 		this.prevBG = attr.prevBG;
 		this.className = attr.className;
 		this.favSubj = attr.favSubj;
+		this.grade = attr.grade;
 	}
 	listsSubjs() {
 		let subjList = ""
@@ -44,6 +49,9 @@ class Student extends LambdaPrime {
 	}
 	sprintChallenge(subj) {
 		return `the ${this.name} has begun sprint challenge on ${subj}`
+	}
+	graduate(){
+		return (this.grade > 70 ? `Dear ${this.name}, hit the bricks and PAY YOUR ISA.` : `Back to the drawing board, MORON.`)
 	}
 }
 
@@ -82,7 +90,8 @@ const pupil = new Student({
 	location: "Vietnam",
 	prevBG: "chimneysweep",
 	className: "Interior Design 417",
-	favSubj: ["table styles", "food design", "table manners"]
+	favSubj: ["table styles", "food design", "table manners"],
+	grade: 110
 })
 
 const mgr = new ProjectMgr({
@@ -107,3 +116,5 @@ clg(pupil.PRAssignment("Plating"))
 clg(pupil.sprintChallenge("Place Settings"))
 clg(mgr.standup("elevators"))
 clg(mgr.debugsCode(pupil))
+clg(`S T R E T C H: ${mgr.grademod(pupil)}`)
+clg(`S T R E T C H: ${pupil.graduate()}`)
